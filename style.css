@@ -1,4 +1,5 @@
-h1{
+@import url('https://fonts.googleapis.com/css2?family=UoqMunThenKhung&display=swap');h1{
+
 	color: #6fbb9a;
 	text-align: center ;
 	font-size: 250%;
@@ -21,6 +22,11 @@ body{
 	/* background-attachment: fixed; */
 }
 
+p{
+	font-family: "UoqMunThenKhung", serif;
+	letter-spacing: 3px;
+}
+
 a:link {color:#FF0000;} 
 a:visited {color:#00FF00;} 
 a:hover {color:#FF00FF;}
@@ -41,3 +47,30 @@ marquee{
 	border: #f6bb9e 1px solid;
 	background-color: #fff;
 }
+.a { background-color: #4060f1; }
+.b {
+	 background-color: #ffbb0071;
+	 padding: 15px; ;
+}
+img {
+	
+	margin: 10px 0;
+	
+	max-width: 100%;
+	height: auto;
+}
+#top
+{
+	position:fixed;
+	bottom:5px;
+	right:5px;
+}
+.photo{
+	float: left;
+	margin-right: 30px;
+ }
+ div {
+	
+	overflow: auto;
+	}
+	
