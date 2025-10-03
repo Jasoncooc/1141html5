@@ -69,8 +69,12 @@ img {
 	float: left;
 	margin-right: 30px;
  }
+ section{
+    float: left;
+    width: 100px;
+}
+
  div {
-	
-	overflow: auto;
+		overflow: auto;
 	}
 	
