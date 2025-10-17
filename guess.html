@@ -3,18 +3,26 @@
 <head>
     <meta charset="utf-8">
     <title>?6?</title>
+    <link href="guess.css" rel="stylesheet" media="all">
     <script src="guess.js" defer></script>
 </head>
 
 <body>
-  <div>
+  
     <h1>猜數字遊戲</h1>
     <label for="guessField">猜一個數字 (1 到 100):</label>
-    <input type="number" class="guessField" id="guessField" min="1" max="100">
+    <input type="number" class="guessField" id="guessField" min="1" max="100"
+           onkeydown="if(event.key==='Enter') document.querySelector('.guessSubmit').click()">
     <button class="guessSubmit">提交</button>
-    <div class="result">2</div>
-    <div class="count">2</div>
+    <button class="restartBtn">重新開始</button>
+    
+    <div class="result">猜測數字:</div>
+    <div class="count">猜測次數：0</div>
+    <p class="guesses">猜過的數字：</p>
+    <p class="mock-text" style="color: red; font-weight: bold; font-size: 20px; margin-top: 10px;"></p>
+
   </div>
+  
   
 </body>
 
