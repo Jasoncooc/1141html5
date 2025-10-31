@@ -5,9 +5,14 @@ const resultDiv = document.querySelector('.result');
 const countDiv = document.querySelector('.count');
 const guessesPara = document.querySelector('.guesses');
 const mockTextPara = document.querySelector('.mock-text');
+const timerDiv = document.querySelector('.timer');
+const progressBar = document.querySelector('.progress-bar'); // 🔹 取得進度條元素
+
 let randomNumber = Math.floor(Math.random() * 100) + 1;
 let guessCount = 0;
 let guessHistory = [];
+let countdown; // 用來儲存 setInterval
+let timeLeft = 30; // 倒數秒數，可自行調整
 const mockTexts = [
   "你確定你會猜嗎？🤔",
   "再努力一點嘛！😏",
@@ -40,6 +45,7 @@ function evaluateGuess() {
     guessSubmit.disabled = true;
     guessField.disabled = true;
     mockTextPara.textContent = ''; 
+    clearInterval(countdown);
   } else {
     resultDiv.textContent = userGuess > randomNumber ? '太高了！' : '太低了！';
     guessField.classList.add('wrong');
@@ -66,6 +72,40 @@ function getEvaluation() {
   return '😅 下次再加油吧～';
 }
 
+// 🔹 倒數計時＋進度條動畫
+function startTimer() {
+  clearInterval(countdown);
+  timeLeft = 30;
+  timerDiv.textContent = `⏰ 剩餘時間：${timeLeft} 秒`;
+  progressBar.style.width = '100%';
+  progressBar.style.backgroundColor = '#4CAF50';
+
+  countdown = setInterval(() => {
+    timeLeft--;
+    timerDiv.textContent = `⏰ 剩餘時間：${timeLeft} 秒`;
+
+    // 根據剩餘時間改變進度條寬度與顏色
+    const percent = (timeLeft / 30) * 100;
+    progressBar.style.width = percent + '%';
+
+    if (percent <= 30) progressBar.style.backgroundColor = '#ff4d4d'; // 🔴 快結束變紅
+    else if (percent <= 60) progressBar.style.backgroundColor = '#ffa500'; // 🟠 中段變橘
+
+    if (timeLeft <= 0) {
+      clearInterval(countdown);
+      resultDiv.textContent = `⌛ 時間到！答案是 ${randomNumber}`;
+      guessSubmit.disabled = true;
+      guessField.disabled = true;
+      document.body.classList.remove('success');
+      mockTextPara.textContent = '下次快一點喔～⏰';
+      progressBar.style.width = '0%';
+      progressBar.style.backgroundColor = '#ff0000';
+    }
+  }, 1000);
+}
+
+
+
 function restartGame() {
   randomNumber = Math.floor(Math.random() * 100) + 1;
   guessCount = 0;
@@ -78,8 +118,11 @@ function restartGame() {
   document.body.classList.remove('success');
   guessField.value = '';
   guessField.focus();
+  startTimer(); // ⏳ 重新開始時重啟倒數
 }
 
 guessSubmit.addEventListener('click', evaluateGuess);
 restartBtn.addEventListener('click', restartGame);
 
+// 🔹 頁面載入時立即啟動倒數
+startTimer();

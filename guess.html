@@ -10,6 +10,10 @@
 <body>
   
     <h1>猜數字遊戲</h1>
+    <p class="timer" style="font-weight:bold; font-size:1.2em;"></p>
+    <div class="progress-container">
+    <div class="progress-bar"></div>
+    </div>
     <label for="guessField">猜一個數字 (1 到 100):</label>
     <input type="number" class="guessField" id="guessField" min="1" max="100"
            onkeydown="if(event.key==='Enter') document.querySelector('.guessSubmit').click()">
